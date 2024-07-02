@@ -1,12 +1,14 @@
 import { countriesApi } from "../../config/api/countriesApi";
-import { AppDispatch } from "./store";
+import { AppDispatch, RootState } from "./store";
 import {
 	setCountries,
 	setCountryById,
 	setCountryByName,
+	setFilters,
 	startLoading,
 } from "./countriesSlice";
 import { CountryProps } from "../../infrastructure/interfaces";
+import { Helpers } from "../../config/helpers";
 
 export const getAllCountries = () => {
 	return async (dispatch: AppDispatch) => {
@@ -59,5 +61,29 @@ export const postActivity = (/* idArray: string[] */) => {
 		// 	console.log(error);
 		// 	throw new Error("Error de ejecución - getCountryById");
 		// }
+	};
+};
+
+export const getFiltering = (
+	alphabetic: string,
+	population: string,
+	season: string[],
+	continent: string[]
+) => {
+	return async (dispatch: AppDispatch, getState: () => RootState) => {
+		dispatch(startLoading());
+		try {
+			const countries = getState().auxAllCountries;
+			const data = Helpers.filter(
+				alphabetic,
+				population,
+				season,
+				continent,
+				countries
+			);
+			dispatch(setFilters(data));
+		} catch (error) {
+			throw new Error("Error de ejecución - getFiltering");
+		}
 	};
 };

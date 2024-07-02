@@ -24,7 +24,7 @@ export const HomeScreen: React.FC = () => {
 				alignItems="center"
 				justifyContent="center"
 				display="flex"
-				gap={5}
+				height="30rem"
 				style={{
 					backgroundColor: "black",
 				}}

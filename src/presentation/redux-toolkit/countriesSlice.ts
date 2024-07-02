@@ -46,8 +46,17 @@ export const countriesSlice = createSlice({
 			state.isLoading = false;
 			state.countryById = action.payload;
 		},
+		setFilters: (state, action: PayloadAction<CountryProps[]>) => {
+			state.isLoading = false;
+			state.allCountries = action.payload;
+		},
 	},
 });
 
-export const { startLoading, setCountries, setCountryByName, setCountryById } =
-	countriesSlice.actions;
+export const {
+	startLoading,
+	setCountries,
+	setCountryByName,
+	setCountryById,
+	setFilters,
+} = countriesSlice.actions;

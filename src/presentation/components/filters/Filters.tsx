@@ -15,7 +15,9 @@ import {
 	ContinentProps,
 	SeasonsProps,
 } from "../../../infrastructure/interfaces";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../../redux-toolkit/hooks";
+import { getFiltering } from "../../redux-toolkit/thunks";
 
 export const Filters: React.FC = () => {
 	const continents = [
@@ -34,6 +36,8 @@ export const Filters: React.FC = () => {
 		SeasonsProps.Winter,
 	];
 
+	const dispatch = useAppDispatch();
+
 	const [continentName, setContinentName] = useState<string[]>([]);
 	const [seasonName, setSeasonName] = useState<string[]>([]);
 	const [population, setPopulation] = useState<string>("");
@@ -46,14 +50,18 @@ export const Filters: React.FC = () => {
 			setContinentName(typeof value === "string" ? value.split(",") : value);
 		else if (name === "seasonName")
 			setSeasonName(typeof value === "string" ? value.split(",") : value);
-		else if (name === "population") setPopulation(value as string);
-		else if (name === "alphabetic") setAlphabetic(value as string);
+		else if (name === "population") {
+			setPopulation(value as string);
+			setAlphabetic("");
+		} else if (name === "alphabetic") {
+			setAlphabetic(value as string);
+			setPopulation("");
+		}
 	};
 
-	console.log(continentName);
-	console.log(seasonName);
-	console.log(population);
-	console.log(alphabetic);
+	useEffect(() => {
+		dispatch(getFiltering(alphabetic, population, seasonName, continentName));
+	}, [dispatch, alphabetic, population, seasonName, continentName]);
 
 	return (
 		<Container disableGutters>
@@ -72,13 +80,13 @@ export const Filters: React.FC = () => {
 					alignItems="center"
 					justifyContent="space-around"
 				>
-					<Typography variant="h2">Arrange</Typography>
+					<Typography variant="h3">Arrange</Typography>
 					<Box
 						display="flex"
 						width="50%"
 						justifyContent="space-between"
 						gap="5rem"
-						mt={5}
+						mt={2}
 					>
 						<FormControl fullWidth>
 							<InputLabel id="Alphabetic">Alphabetic</InputLabel>
@@ -116,8 +124,14 @@ export const Filters: React.FC = () => {
 					alignItems="center"
 					justifyContent="space-around"
 				>
-					<Typography variant="h2">Sort</Typography>
-					<Box display="flex" width="50%" justifyContent="space-between">
+					<Typography variant="h3">Sort</Typography>
+					<Box
+						display="flex"
+						width="50%"
+						justifyContent="space-between"
+						gap="5rem"
+						mt={2}
+					>
 						{/* Activity by season */}
 						<FormControl sx={{ m: 1, width: 300 }}>
 							<InputLabel id="ActivityBySeason">Activity by season</InputLabel>

@@ -1,24 +1,10 @@
 import { Button, Container, Typography } from "@mui/material";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux-toolkit/hooks";
-import { getAllCountries } from "../../redux-toolkit/thunks";
 
 import { Link } from "react-router-dom";
 import "./landing.css";
 import "animate.css";
 
 export const LandingScreen: React.FC = () => {
-	const dispatch = useAppDispatch();
-	const countries = useAppSelector((state) => state.allCountries);
-	const isLoading = useAppSelector((state) => state.isLoading);
-
-	useEffect(() => {
-		if (!countries.length && !isLoading) {
-			dispatch(getAllCountries());
-		}
-	}, [dispatch, countries, isLoading]);
-
-	console.log(countries);
 	return (
 		<Container
 			sx={{ maxWidth: "100% !important", backgroundColor: "black" }}

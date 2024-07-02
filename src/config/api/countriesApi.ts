@@ -1,10 +1,8 @@
 import axios from "axios";
 
-const { STAGE, API_LOCAL, API_PROD } = process.env;
-
-export const API_URL = STAGE === "prod" ? API_PROD : API_LOCAL;
+const API_PROD = "https://backcountries-d6li.onrender.com";
 
 export const countriesApi = axios.create({
-	baseURL: `${API_URL}`,
+	baseURL: API_PROD,
 	headers: { "Content-Type": "application/json" },
 });

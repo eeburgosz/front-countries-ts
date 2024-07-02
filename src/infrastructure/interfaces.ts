@@ -1,32 +1,40 @@
-export interface Country {
+export interface CountryProps {
 	id: string;
 	name: string;
 	flag: string;
-	continent: Continent;
+	// continent: ContinentProps;
+	continent: string;
 	population: number;
 	maps: string;
-	Activities: Activity[];
+	Activities: ActivityProps[];
 }
 
-export interface Activity {
+export interface ActivityProps {
 	id: number;
 	activityName: string;
 	difficulty: number;
 	duration: number;
 	season: string;
-	CountryActivity: CountryActivity;
+	CountryActivity: CountryActivityProps;
 }
 
-export interface CountryActivity {
+export interface CountryActivityProps {
 	CountryId: string;
 	ActivityId: number;
 }
 
-export enum Continent {
+export enum ContinentProps {
 	Africa = "Africa",
 	Americas = "Americas",
 	Antarctic = "Antarctic",
 	Asia = "Asia",
 	Europe = "Europe",
 	Oceania = "Oceania",
+}
+
+export enum SeasonsProps {
+	Summer = "Summer",
+	Winter = "Winter",
+	Spring = "Spring",
+	Autumn = "Autumn",
 }

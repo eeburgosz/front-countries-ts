@@ -1,0 +1,17 @@
+.landing-container {
+	display: flex !important;
+	align-items: center;
+	flex-direction: column;
+	height: 100vh;
+	max-width: 100% !important;
+	background-image: url("../../../assets/continents.jpg");
+	mask-image: linear-gradient(black 30%, transparent);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.landing-container a {
+	text-decoration: none;
+}

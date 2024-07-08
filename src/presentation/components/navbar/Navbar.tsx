@@ -2,6 +2,10 @@ import { Box, AppBar, Typography, Input } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
+	const handleSubmit: React.FormEventHandler<HTMLDivElement> = () => {
+		console.log("submit");
+	};
+
 	return (
 		<Box
 			sx={{
@@ -28,7 +32,7 @@ export const Navbar = () => {
 				<Link to={"/create"} className="links">
 					<Typography sx={{ fontWeight: 100 }}>Create</Typography>
 				</Link>
-				<Input placeholder="Search a country" />
+				<Input onSubmit={handleSubmit} placeholder="Search a country" />
 			</AppBar>
 		</Box>
 	);

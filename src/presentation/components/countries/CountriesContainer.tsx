@@ -1,4 +1,10 @@
-import { Box, Container, Pagination, Typography } from "@mui/material";
+import {
+	Box,
+	CircularProgress,
+	Container,
+	Pagination,
+	Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useAppSelector } from "../../redux-toolkit/hooks";
 import { Card } from "../";
@@ -23,9 +29,9 @@ export const CountriesContainer: React.FC = () => {
 	return (
 		<>
 			{loading ? (
-				<Typography variant="h4" display={"flex"} justifyContent={"center"}>
-					Loading
-				</Typography>
+				<Box display={"flex"} sx={{ justifyContent: "center" }}>
+					<CircularProgress color="warning" />
+				</Box>
 			) : countries.length === 0 ? (
 				<Typography variant="h4" display={"flex"} justifyContent={"center"}>
 					No countries found

@@ -21,6 +21,7 @@ export const HomeScreen: React.FC = () => {
 			</Box>
 			{/* Sección 2 */}
 			<Box
+				pt={5}
 				component="section"
 				className="image-container"
 				alignItems="center"
@@ -41,7 +42,7 @@ export const HomeScreen: React.FC = () => {
 				component="section"
 				height={"fit-content"}
 				pt={10}
-				pb={50}
+				pb={30}
 				className="image-container"
 				style={{
 					backgroundImage: `url(${require("../../../assets/fondo1.jpg")})`,

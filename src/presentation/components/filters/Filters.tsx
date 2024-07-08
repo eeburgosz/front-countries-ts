@@ -1,5 +1,6 @@
 import {
 	Box,
+	Button,
 	Checkbox,
 	Container,
 	FormControl,
@@ -69,6 +70,11 @@ export const Filters: React.FC = () => {
 
 			return newParams;
 		});
+	};
+
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		setFilterParams(initialState);
 	};
 
 	useEffect(() => {
@@ -233,6 +239,21 @@ export const Filters: React.FC = () => {
 						</FormControl>
 					</Box>
 				</Box>
+			</Box>
+			<Box
+				width={"100%"}
+				display={"flex"}
+				justifyContent={"center"}
+				mb={10}
+				mt={5}
+			>
+				<Button
+					variant="outlined"
+					color="error"
+					onClick={(e) => handleClick(e)}
+				>
+					Reset filters
+				</Button>
 			</Box>
 		</Container>
 	);

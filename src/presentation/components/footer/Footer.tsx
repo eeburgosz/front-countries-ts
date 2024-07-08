@@ -15,8 +15,9 @@ export const Footer = () => {
 				height="30rem"
 				sx={{
 					backgroundColor: "black",
-					"@media(max-width:768px": {
+					"@media(max-width:768px)": {
 						flexDirection: "column",
+						height: "15rem",
 					},
 				}}
 				border={"1px solid red"}
@@ -28,6 +29,13 @@ export const Footer = () => {
 					width={"50%"}
 					alignItems={"center"}
 					justifyContent={"center"}
+					sx={{
+						"@media(max-width:768px)": {
+							width: "100%",
+							textAlign: "center",
+							mb: "1rem",
+						},
+					}}
 				>
 					<Typography variant="h4" display={"flex"}>
 						Ernesto Burgos
@@ -37,47 +45,63 @@ export const Footer = () => {
 					</Typography>
 				</Box>
 				<Box
-					alignItems={"center"}
-					justifyContent={"space-around"}
 					display={"flex"}
+					flexDirection={"column"}
 					width={"50%"}
+					alignItems={"center"}
+					justifyContent={"center"}
+					sx={{
+						"@media(max-width:768px)": {
+							width: "100%",
+						},
+					}}
 				>
-					<a
-						style={{
-							textDecoration: "none",
-							color: "white",
-							cursor: "pointer",
-						}}
-						target="_blank"
-						href="https://www.github.com/eeburgosz"
-						rel="noreferrer"
+					<Typography variant="h4" pb={4}>
+						Contact me
+					</Typography>
+					<Box
+						alignItems={"center"}
+						justifyContent={"space-around"}
+						display={"flex"}
+						width={"100%"}
 					>
-						Github
-					</a>
-					<a
-						style={{
-							textDecoration: "none",
-							color: "white",
-							cursor: "pointer",
-						}}
-						target="_blank"
-						href="https://www.github.com/eeburgosz"
-						rel="noreferrer"
-					>
-						Portfolio
-					</a>
-					<a
-						style={{
-							textDecoration: "none",
-							color: "white",
-							cursor: "pointer",
-						}}
-						target="_blank"
-						href="https://www.github.com/eeburgosz"
-						rel="noreferrer"
-					>
-						LinkedIn
-					</a>
+						<a
+							style={{
+								textDecoration: "none",
+								color: "white",
+								cursor: "pointer",
+							}}
+							target="_blank"
+							href="https://www.github.com/eeburgosz"
+							rel="noreferrer"
+						>
+							Github
+						</a>
+						<a
+							style={{
+								textDecoration: "none",
+								color: "white",
+								cursor: "pointer",
+							}}
+							target="_blank"
+							href="https://portfolio-eeburgosz.vercel.app/"
+							rel="noreferrer"
+						>
+							Portfolio
+						</a>
+						<a
+							style={{
+								textDecoration: "none",
+								color: "white",
+								cursor: "pointer",
+							}}
+							target="_blank"
+							href="https://www.linkedin.com/in/eeburgosz"
+							rel="noreferrer"
+						>
+							LinkedIn
+						</a>
+					</Box>
 				</Box>
 			</Box>
 		</Container>

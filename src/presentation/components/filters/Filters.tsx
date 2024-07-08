@@ -19,6 +19,20 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../redux-toolkit/hooks";
 import { getFiltering } from "../../redux-toolkit/thunks";
 
+interface FilterParamsProps {
+	alphabetic: string;
+	population: string;
+	seasonName: string[];
+	continentName: string[];
+}
+
+const initialState: FilterParamsProps = {
+	alphabetic: "",
+	population: "",
+	seasonName: [],
+	continentName: [],
+};
+
 export const Filters: React.FC = () => {
 	const continents = [
 		ContinentProps.Africa,
@@ -38,30 +52,29 @@ export const Filters: React.FC = () => {
 
 	const dispatch = useAppDispatch();
 
-	const [continentName, setContinentName] = useState<string[]>([]);
-	const [seasonName, setSeasonName] = useState<string[]>([]);
-	const [population, setPopulation] = useState<string>("");
-	const [alphabetic, setAlphabetic] = useState<string>("");
+	const [filterParams, setFilterParams] =
+		useState<FilterParamsProps>(initialState);
 
 	const handleChange = (event: SelectChangeEvent<string | string[]>) => {
 		const { value, name } = event.target;
 
-		if (name === "continentName")
-			setContinentName(typeof value === "string" ? value.split(",") : value);
-		else if (name === "seasonName")
-			setSeasonName(typeof value === "string" ? value.split(",") : value);
-		else if (name === "population") {
-			setPopulation(value as string);
-			setAlphabetic("");
-		} else if (name === "alphabetic") {
-			setAlphabetic(value as string);
-			setPopulation("");
-		}
+		setFilterParams((prevParams) => {
+			const newParams = { ...prevParams, [name]: value };
+
+			if (name === "population") {
+				newParams.alphabetic = "";
+			} else if (name === "alphabetic") {
+				newParams.population = "";
+			}
+
+			return newParams;
+		});
 	};
 
 	useEffect(() => {
+		const { alphabetic, population, seasonName, continentName } = filterParams;
 		dispatch(getFiltering(alphabetic, population, seasonName, continentName));
-	}, [dispatch, alphabetic, population, seasonName, continentName]);
+	}, [dispatch, filterParams]);
 
 	return (
 		<Container disableGutters>
@@ -71,6 +84,11 @@ export const Filters: React.FC = () => {
 				alignItems="center"
 				justifyContent="center"
 				gap="5rem"
+				sx={{
+					"@media (max-width:768px)": {
+						gap: "1rem",
+					},
+				}}
 			>
 				<Box
 					width="100vw"
@@ -80,20 +98,37 @@ export const Filters: React.FC = () => {
 					alignItems="center"
 					justifyContent="space-around"
 				>
-					<Typography variant="h3">Arrange</Typography>
+					<Typography
+						variant="h3"
+						sx={{
+							"@media (max-width:768px)": {
+								fontSize: "2rem",
+							},
+						}}
+					>
+						Sort
+					</Typography>
 					<Box
 						display="flex"
 						width="50%"
 						justifyContent="space-between"
 						gap="5rem"
 						mt={2}
+						sx={{
+							"@media (max-width:768px)": {
+								paddingLeft: "1rem",
+								paddingRight: "1rem",
+								width: "100%",
+								justifyContent: "center",
+							},
+						}}
 					>
 						<FormControl fullWidth>
 							<InputLabel id="Alphabetic">Alphabetic</InputLabel>
 							<Select
 								labelId="Alphabetic"
 								name="alphabetic"
-								value={alphabetic}
+								value={filterParams.alphabetic}
 								label="Alphabetic"
 								onChange={handleChange}
 							>
@@ -106,7 +141,7 @@ export const Filters: React.FC = () => {
 							<Select
 								labelId="Population"
 								name="population"
-								value={population}
+								value={filterParams.population}
 								label="Population"
 								onChange={handleChange}
 							>
@@ -124,13 +159,30 @@ export const Filters: React.FC = () => {
 					alignItems="center"
 					justifyContent="space-around"
 				>
-					<Typography variant="h3">Sort</Typography>
+					<Typography
+						variant="h3"
+						sx={{
+							"@media (max-width:768px)": {
+								fontSize: "2rem",
+							},
+						}}
+					>
+						Filters
+					</Typography>
 					<Box
 						display="flex"
 						width="50%"
 						justifyContent="space-between"
 						gap="5rem"
 						mt={2}
+						sx={{
+							"@media (max-width:768px)": {
+								paddingLeft: "1rem",
+								paddingRight: "1rem",
+								width: "100%",
+								justifyContent: "center",
+							},
+						}}
 					>
 						{/* Activity by season */}
 						<FormControl sx={{ m: 1, width: 300 }}>
@@ -140,14 +192,16 @@ export const Filters: React.FC = () => {
 								id="activity-by-season"
 								name="seasonName"
 								multiple
-								value={seasonName}
+								value={filterParams.seasonName}
 								onChange={handleChange}
 								input={<OutlinedInput label="Tag" />}
 								renderValue={(selected) => selected.join(", ")}
 							>
 								{seasons.map((name) => (
 									<MenuItem key={name} value={name}>
-										<Checkbox checked={seasonName.indexOf(name) > -1} />
+										<Checkbox
+											checked={filterParams.seasonName.indexOf(name) > -1}
+										/>
 										<ListItemText primary={name} />
 									</MenuItem>
 								))}
@@ -162,14 +216,16 @@ export const Filters: React.FC = () => {
 								id="continent-select"
 								name="continentName"
 								multiple
-								value={continentName}
+								value={filterParams.continentName}
 								onChange={handleChange}
 								input={<OutlinedInput label="Tag" />}
 								renderValue={(selected) => selected.join(", ")}
 							>
 								{continents.map((name) => (
 									<MenuItem key={name} value={name}>
-										<Checkbox checked={continentName.indexOf(name) > -1} />
+										<Checkbox
+											checked={filterParams.continentName.indexOf(name) > -1}
+										/>
 										<ListItemText primary={name} />
 									</MenuItem>
 								))}

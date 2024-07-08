@@ -17,7 +17,6 @@ export const Navbar = () => {
 					justifyContent: "space-around",
 					alignItems: "center",
 					height: "3rem",
-					// border: "1px solid red",
 				}}
 			>
 				<Link to={"/home"} className="links">

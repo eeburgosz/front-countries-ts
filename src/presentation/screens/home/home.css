@@ -1,7 +1,7 @@
 .image-container {
 	position: relative;
 	width: 100%;
-	height: 100vh; /* Ajusta la altura según sea necesario */
+	height: 100vh;
 	background-size: cover;
 	background-position: center;
 	overflow: hidden;
@@ -13,7 +13,7 @@
 	position: absolute;
 	left: 0;
 	width: 100%;
-	height: 70%;
+	height: 40%;
 	pointer-events: none;
 	z-index: 1;
 }
@@ -26,4 +26,16 @@
 .image-container::after {
 	bottom: 0;
 	background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+@media (max-width: 768px) {
+	.image-container {
+		height: fit-content;
+		padding-top: 4rem;
+	}
+
+	.image-container::before,
+	.image-container::after {
+		height: 15%;
+	}
 }

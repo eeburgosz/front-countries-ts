@@ -81,7 +81,7 @@ export const getFiltering = (
 				continent,
 				countries
 			);
-			dispatch(setFilters(data));
+			data.length === 0 ? dispatch(setFilters([])) : dispatch(setFilters(data));
 		} catch (error) {
 			throw new Error("Error de ejecución - getFiltering");
 		}

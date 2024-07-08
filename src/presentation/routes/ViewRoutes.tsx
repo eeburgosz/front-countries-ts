@@ -7,7 +7,7 @@ import {
 	HomeScreen,
 } from "../screens";
 import { RoutesEnum } from "./routes";
-import { Navbar } from "../components";
+import { Footer, Navbar } from "../components";
 
 export const ViewRoutes: React.FC = () => {
 	return (
@@ -20,6 +20,7 @@ export const ViewRoutes: React.FC = () => {
 				<Route path={RoutesEnum.COUNTRYID} element={<DetailsScreen />} />
 				<Route path={RoutesEnum.VIEW_ROUTES} element={<HomeScreen />} />
 			</Routes>
+			<Footer />
 		</>
 	);
 };

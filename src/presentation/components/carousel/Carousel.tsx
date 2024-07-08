@@ -32,7 +32,7 @@ export const Carousel: React.FC = () => {
 	};
 
 	return (
-		<Container disableGutters>
+		<Container disableGutters sx={{ maxWidth: "100% !important" }}>
 			<Slider {...settings}>
 				{images.map((image, index) => (
 					<Box component="div" key={index}>

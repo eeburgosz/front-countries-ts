@@ -1,13 +1,14 @@
 import React from "react";
 import "./home.css";
 import { Box, Container } from "@mui/material";
-import { Carousel, Filters } from "../../components";
+import { Carousel, CountriesContainer, Filters } from "../../components";
 
 export const HomeScreen: React.FC = () => {
 	return (
 		<Container disableGutters sx={{ maxWidth: "100vw !important", m: 0 }}>
 			{/* Carousel */}
 			<Box
+				component="section"
 				className="image-container"
 				alignItems="center"
 				justifyContent="center"
@@ -20,94 +21,35 @@ export const HomeScreen: React.FC = () => {
 			</Box>
 			{/* Sección 2 */}
 			<Box
+				component="section"
 				className="image-container"
 				alignItems="center"
 				justifyContent="center"
 				display="flex"
 				height="30rem"
-				style={{
+				sx={{
 					backgroundColor: "black",
+					"@media (max-width:768px)": {
+						height: "fit-content",
+					},
 				}}
 			>
 				<Filters />
 			</Box>
 			{/* Sección 3 */}
 			<Box
+				component="section"
+				height={"fit-content"}
+				pt={10}
+				pb={50}
 				className="image-container"
 				style={{
 					backgroundImage: `url(${require("../../../assets/fondo1.jpg")})`,
 				}}
 			>
 				{/* Cards Container */}
+				<CountriesContainer />
 			</Box>
 		</Container>
 	);
 };
-
-// <Container disableGutters sx={{ maxWidth: "100vw !important", m: 0 }}>
-// 		<Box
-// 			className="image-container"
-// 			alignItems={"center"}
-// 			justifyContent={"center"}
-// 			display={"flex"}
-// 			style={{
-// 				backgroundImage: `url(${require("../../../assets/fondo2.jpg")})`,
-// 			}}
-// 		>
-// 			<Card
-// 				sx={{
-// 					display: "flex",
-// 					borderRadius: "30px",
-// 					backgroundColor: "WindowText",
-// 					cursor: "pointer",
-// 				}}
-// 			>
-// 				<Box sx={{ display: "flex", flexDirection: "column" }}>
-// 					<CardContent sx={{ flex: "1 0 auto" }}>
-// 						<Typography variant="h1">See all countries</Typography>
-// 					</CardContent>
-// 					<Box
-// 						sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
-// 					></Box>
-// 				</Box>
-// 			</Card>
-// 		</Box>
-// 		<Box
-// 			className="image-container"
-// 			alignItems={"center"}
-// 			justifyContent={"center"}
-// 			display={"flex"}
-// 			gap={5}
-// 			style={{
-// 				backgroundColor: "black",
-// 			}}
-// 		>
-// 			<Card sx={{ display: "flex", borderRadius: "30px" }}>
-// 				<Box sx={{ display: "flex", flexDirection: "column" }}>
-// 					<CardContent sx={{ flex: "1 0 auto" }}>
-// 						<Typography variant="h3">Sort by population</Typography>
-// 					</CardContent>
-// 					<Box
-// 						sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
-// 					></Box>
-// 				</Box>
-// 			</Card>
-// 			<Card sx={{ display: "flex", borderRadius: "30px" }}>
-// 				<Box sx={{ display: "flex", flexDirection: "column" }}>
-// 					<CardContent sx={{ flex: "1 0 auto" }}>
-// 						<Typography variant="h3">Sort by alphabet</Typography>
-// 					</CardContent>
-// 					<Box
-// 						sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
-// 					></Box>
-// 				</Box>
-// 			</Card>
-// 		</Box>
-// 		<Box
-// 			className="image-container"
-// 			style={{
-// 				backgroundImage: `url(${require("../../../assets/fondo1.jpg")})`,
-// 			}}
-// 		></Box>
-// 		<Carousel />
-// 	</Container>
